@@ -1,0 +1,113 @@
+{
+	"name": "Table_2024ByConstituency",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Electoral_Raw_Blob2SQL_Sink",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "ONS_ID",
+				"type": "varchar"
+			},
+			{
+				"name": "Constituency_name",
+				"type": "varchar"
+			},
+			{
+				"name": "County_name",
+				"type": "varchar"
+			},
+			{
+				"name": "Region_name",
+				"type": "varchar"
+			},
+			{
+				"name": "Country_name",
+				"type": "varchar"
+			},
+			{
+				"name": "Member_first_name",
+				"type": "varchar"
+			},
+			{
+				"name": "Member_surname",
+				"type": "varchar"
+			},
+			{
+				"name": "Result",
+				"type": "varchar"
+			},
+			{
+				"name": "First_party",
+				"type": "varchar"
+			},
+			{
+				"name": "Second_party",
+				"type": "varchar"
+			},
+			{
+				"name": "Electorate",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Valid_votes",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Invalid_votes",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Majority",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Con",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Lab",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "LD",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "RUK",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Green",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "All_other_candidates",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Of_which_other_winner",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "2024ByConstituency"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,83 @@
+{
+	"name": "Table_2024ByCandidate",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Electoral_Raw_Blob2SQL_Sink",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "2024_Cand_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ONS_ID",
+				"type": "varchar"
+			},
+			{
+				"name": "Constituency_name",
+				"type": "varchar"
+			},
+			{
+				"name": "County_name",
+				"type": "varchar"
+			},
+			{
+				"name": "Region_name",
+				"type": "varchar"
+			},
+			{
+				"name": "Country_name",
+				"type": "varchar"
+			},
+			{
+				"name": "Party_name",
+				"type": "varchar"
+			},
+			{
+				"name": "Party_abbr",
+				"type": "varchar"
+			},
+			{
+				"name": "Candidate_first_name",
+				"type": "varchar"
+			},
+			{
+				"name": "Candidate_surname",
+				"type": "varchar"
+			},
+			{
+				"name": "Sitting_MP",
+				"type": "varchar"
+			},
+			{
+				"name": "Former_MP",
+				"type": "varchar"
+			},
+			{
+				"name": "Votes",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Share",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Change",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "2024ByCandidate"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

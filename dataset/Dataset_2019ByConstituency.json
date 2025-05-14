@@ -1,0 +1,154 @@
+{
+	"name": "Dataset_2019ByConstituency",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Electoral_Raw_Blob2SQL_Source",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "2019GE by constituency.csv",
+				"folderPath": "rawdata",
+				"container": "electoraldatabyconstituency"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "ONS ID",
+				"type": "String"
+			},
+			{
+				"name": "ONS region ID",
+				"type": "String"
+			},
+			{
+				"name": "Constituency name",
+				"type": "String"
+			},
+			{
+				"name": "County name",
+				"type": "String"
+			},
+			{
+				"name": "Region name",
+				"type": "String"
+			},
+			{
+				"name": "Country name",
+				"type": "String"
+			},
+			{
+				"name": "Constituency type",
+				"type": "String"
+			},
+			{
+				"name": "Declaration time",
+				"type": "String"
+			},
+			{
+				"name": "Member first name",
+				"type": "String"
+			},
+			{
+				"name": "Member surname",
+				"type": "String"
+			},
+			{
+				"name": "Member gender",
+				"type": "String"
+			},
+			{
+				"name": "Result",
+				"type": "String"
+			},
+			{
+				"name": "First party",
+				"type": "String"
+			},
+			{
+				"name": "Second party",
+				"type": "String"
+			},
+			{
+				"name": "Electorate",
+				"type": "String"
+			},
+			{
+				"name": "Valid votes",
+				"type": "String"
+			},
+			{
+				"name": "Invalid votes",
+				"type": "String"
+			},
+			{
+				"name": "Majority",
+				"type": "String"
+			},
+			{
+				"name": "Con",
+				"type": "String"
+			},
+			{
+				"name": "Lab",
+				"type": "String"
+			},
+			{
+				"name": "LD",
+				"type": "String"
+			},
+			{
+				"name": "BRX",
+				"type": "String"
+			},
+			{
+				"name": "Green",
+				"type": "String"
+			},
+			{
+				"name": "SNP",
+				"type": "String"
+			},
+			{
+				"name": "PC",
+				"type": "String"
+			},
+			{
+				"name": "DUP",
+				"type": "String"
+			},
+			{
+				"name": "SF",
+				"type": "String"
+			},
+			{
+				"name": "SDLP",
+				"type": "String"
+			},
+			{
+				"name": "UUP",
+				"type": "String"
+			},
+			{
+				"name": "APNI",
+				"type": "String"
+			},
+			{
+				"name": "All other candidates",
+				"type": "String"
+			},
+			{
+				"name": "Of which other winner",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

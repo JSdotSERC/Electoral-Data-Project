@@ -1,0 +1,9 @@
+{
+	"name": "electoraldatadf",
+	"location": "uksouth",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "74288bd7-fcdf-4a0b-9d11-0a178869f568",
+		"tenantId": "54efe58d-72b7-45af-9a01-30ee5f377a71"
+	}
+}

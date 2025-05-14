@@ -1,0 +1,110 @@
+{
+	"name": "Dataset_2019ByCandidate",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Electoral_Raw_Blob2SQL_Source",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "2019GE by candidates.csv",
+				"folderPath": "rawdata",
+				"container": "electoraldatabycandidate"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "ONS ID",
+				"type": "String"
+			},
+			{
+				"name": "ONS region ID",
+				"type": "String"
+			},
+			{
+				"name": "Constituency name",
+				"type": "String"
+			},
+			{
+				"name": "County name",
+				"type": "String"
+			},
+			{
+				"name": "Region name",
+				"type": "String"
+			},
+			{
+				"name": "Country name",
+				"type": "String"
+			},
+			{
+				"name": "Constituency type",
+				"type": "String"
+			},
+			{
+				"name": "Party name",
+				"type": "String"
+			},
+			{
+				"name": "Party abbreviation",
+				"type": "String"
+			},
+			{
+				"name": "Electoral Commission party ID",
+				"type": "String"
+			},
+			{
+				"name": "MNIS party ID",
+				"type": "String"
+			},
+			{
+				"name": "Electoral Commission adjunct party ID",
+				"type": "String"
+			},
+			{
+				"name": "Candidate first name",
+				"type": "String"
+			},
+			{
+				"name": "Candidate surname",
+				"type": "String"
+			},
+			{
+				"name": "Candidate gender",
+				"type": "String"
+			},
+			{
+				"name": "Sitting MP",
+				"type": "String"
+			},
+			{
+				"name": "Former MP",
+				"type": "String"
+			},
+			{
+				"name": "Member MNIS ID",
+				"type": "String"
+			},
+			{
+				"name": "Votes",
+				"type": "String"
+			},
+			{
+				"name": "Share",
+				"type": "String"
+			},
+			{
+				"name": "Change",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,1103 @@
+{
+	"name": "Electoral_RawData_Blob2SQL",
+	"properties": {
+		"activities": [
+			{
+				"name": "2024 By Candidate",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "DELETE FROM [2024ByCandidate];",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ONS ID",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ONS_ID",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Constituency name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Constituency_name",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "County name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "County_name",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Region name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Region_name",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Country name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Country_name",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Party name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Party_name",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Party abbreviation",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Party_abbr",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Candidate first name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Candidate_first_name",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Candidate surname",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Candidate_surname",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Sitting MP",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Sitting_MP",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Former MP",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Former_MP",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Votes",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Votes",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Share",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Share",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "Change",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Change",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Dataset_2024ByCandidate",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Table_2024ByCandidate",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "2019 By Candidate",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "2024 By Candidate",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "DELETE FROM [2019ByCandidate];",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ONS ID",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ONS_ID",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Constituency name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Constituency_name",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "County name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "County_name",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Region name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Region_name",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Country name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Country_name",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Party name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Party_name",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Party abbreviation",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Party_abbr",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Candidate first name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Candidate_first_name",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Candidate surname",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Candidate_surname",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Sitting MP",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Sitting_MP",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Former MP",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Former_MP",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Votes",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Votes",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Share",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Share",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "Change",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Change",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 6,
+									"precision": 18
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Dataset_2019ByCandidate",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Table_2019ByCandidate",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "2024 By Constituency",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "2019 By Candidate",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "DELETE FROM [2024ByConstituency];",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ONS ID",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ONS_ID",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Constituency name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Constituency_name",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "County name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "County_name",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Region name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Region_name",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Country name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Country_name",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Member first name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Member_first_name",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Member surname",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Member_surname",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Result",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Result",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "First party",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "First_party",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Second party",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Second_party",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Electorate",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Electorate",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Valid votes",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Valid_votes",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Invalid votes",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Invalid_votes",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Majority",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Majority",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Con",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Con",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Lab",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Lab",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "LD",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "LD",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "RUK",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "RUK",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Green",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Green",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "All other candidates",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "All_other_candidates",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Of which other winner",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Of_which_other_winner",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Dataset_2024ByConstituency",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Table_2024ByConstituency",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "2019 By Constituency",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "2024 By Constituency",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "DELETE FROM [2019ByConstituency];",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ONS ID",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ONS_ID",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Constituency name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Constituency_name",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "County name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "County_name",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Region name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Region_name",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Country name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Country_name",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Member first name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Member_first_name",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Member surname",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Member_surname",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Result",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Result",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "First party",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "First_party",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Second party",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Second_party",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Electorate",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Electorate",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Valid votes",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Valid_votes",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Invalid votes",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Invalid_votes",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Majority",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Majority",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Con",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Con",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Lab",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Lab",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "LD",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "LD",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "BRX",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "BRX",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Green",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Green",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "All other candidates",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "All_other_candidates",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Of which other winner",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Of_which_other_winner",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Dataset_2019ByConstituency",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Table_2019ByConstituency",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2025-05-12T08:57:21Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
